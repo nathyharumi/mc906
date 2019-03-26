@@ -1,1 +1,1 @@
-# mc906
+# MC906 - Introdução à Inteligência Artificial
