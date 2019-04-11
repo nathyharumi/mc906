@@ -114,7 +114,7 @@ class Node:
                     problem.path_cost(self.path_cost, self.state,
                                       action, next_state))
         return next_node
-    
+
     def solution(self):
         """Return the sequence of actions to go from the root to this node."""
         return [node.action for node in self.path()[1:]]
@@ -409,31 +409,31 @@ def astar_search(problem, h=None):
     return best_first_graph_search(problem, lambda n: n.path_cost + h(n))
 
 # ______________________________________________________________________________
-# A* heuristics 
+# A* heuristics
 
 class EightPuzzle(Problem):
 
     """ The problem of sliding tiles numbered from 1 to 8 on a 3x3 board,
     where one of the squares is a blank. A state is represented as a tuple of length 9,
     where element at index i represents the tile number  at index i (0 if it's an empty square) """
- 
+
     def __init__(self, initial, goal=(1, 2, 3, 4, 5, 6, 7, 8, 0)):
         """ Define goal state and initialize a problem """
 
         self.goal = goal
         Problem.__init__(self, initial, goal)
-    
+
     def find_blank_square(self, state):
         """Return the index of the blank square in a given state"""
 
         return state.index(0)
-    
+
     def actions(self, state):
         """ Return the actions that can be executed in the given state.
         The result would be a list, since there are only four possible actions
         in any given state of the environment """
-        
-        possible_actions = ['UP', 'DOWN', 'LEFT', 'RIGHT']       
+
+        possible_actions = ['UP', 'DOWN', 'LEFT', 'RIGHT']
         index_blank_square = self.find_blank_square(state)
 
         if index_blank_square % 3 == 0:
@@ -474,11 +474,11 @@ class EightPuzzle(Problem):
             for j in range(i+1, len(state)):
                 if (state[i] > state[j]) and state[i] != 0 and state[j]!= 0:
                     inversion += 1
-        
+
         return inversion % 2 == 0
-    
+
     def h(self, node):
-        """ Return the heuristic value for a given state. Default heuristic function used is 
+        """ Return the heuristic value for a given state. Default heuristic function used is
         h(n) = number of misplaced tiles """
 
         return sum(s != g for (s, g) in zip(node.state, self.goal))
@@ -661,7 +661,7 @@ def simulated_annealing(problem, schedule=exp_schedule()):
             current = next_choice
 
 def simulated_annealing_full(problem, schedule=exp_schedule()):
-    """ This version returns all the states encountered in reaching 
+    """ This version returns all the states encountered in reaching
     the goal state."""
     states = []
     current = Node(problem.initial)
@@ -715,7 +715,7 @@ def and_or_graph_search(problem):
 
 # Pre-defined actions for PeakFindingProblem
 directions4 = { 'W':(-1, 0), 'N':(0, 1), 'E':(1, 0), 'S':(0, -1) }
-directions8 = dict(directions4) 
+directions8 = dict(directions4)
 directions8.update({'NW':(-1, 1), 'NE':(1, 1), 'SE':(1, -1), 'SW':(-1, -1) })
 
 class PeakFindingProblem(Problem):
@@ -966,7 +966,7 @@ def recombine_uniform(x, y):
         result[ix] = x[ix] if i < n / 2 else y[ix]
 
     return ''.join(str(r) for r in result)
-        
+
 
 def mutate(x, gene_pool, pmut):
     if random.uniform(0, 1) >= pmut:
@@ -1557,4 +1557,3 @@ def compare_graph_searchers():
                                 GraphProblem('Q', 'WA', australia_map)],
                       header=['Searcher', 'romania_map(Arad, Bucharest)',
                               'romania_map(Oradea, Neamt)', 'australia_map'])
-
