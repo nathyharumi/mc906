@@ -1,3 +1,11 @@
+##
+# Nathália Harumi Kuromiya - RA 175188
+# Assignment 1
+#
+# This file is responsible for modeling the grid for display purposes, which
+# includes the external and internal walls.
+##
+
 import numpy as np
 
 # grid dimensions and walls
@@ -13,7 +21,6 @@ W2_YMAX = 60
 def y_converter(y):
     return abs(y - YMAX + 1)
 
-# for graphic purposes
 matrix = np.zeros((YMAX,XMAX))
 
 # build the external walls
@@ -32,7 +39,13 @@ def print_grid(filename):
     f = open(filename, "w+")
     for line in range(YMIN,YMAX):
         for column in range(XMIN,XMAX):
-            f.write(str(int(matrix[line][column])))
-            f.write(" ")
+            f.write(str(int(matrix[line][column])) + " ")
         f.write("\n")
+    f.close()
+
+def print_csv(filename):
+    f = open(filename, "w+")
+    for line in range(YMIN,YMAX):
+        for column in range(XMIN,XMAX):
+            f.write(str(line) + ", " + str(column) + ", " + str(int(matrix[line][column])) + ", \n")
     f.close()
